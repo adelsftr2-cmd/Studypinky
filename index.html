@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#e94f9b">
+<title>StudyPink — Pengingat Belajar</title>
+<style>
+:root{--pink:#e94f9b;--pink2:#ff8ec5;--pale:#fff0f7;--ink:#4a2440;--muted:#8b7183;--line:#f5d5e6;--green:#269b70;--shadow:0 12px 35px #c9508d1c}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(160deg,#fff7fb,#ffeaf4 55%,#fff);color:var(--ink);min-height:100vh}
+header{padding:22px 16px 30px;background:linear-gradient(120deg,#e94f9b,#ff8ec5);color:#fff;border-radius:0 0 28px 28px}.wrap{max-width:980px;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:900;font-size:1.35rem}.brand small{display:block;font-size:.75rem;font-weight:600;opacity:.9;letter-spacing:1px}.status{font-size:.76rem;background:#ffffff30;border:1px solid #ffffff70;border-radius:99px;padding:8px 10px}
+h1{font-size:clamp(1.55rem,5vw,2.3rem);line-height:1.12;margin:25px 0 8px}.hero p{margin:0;opacity:.95}.main{padding:18px 14px 40px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:#fff;border:1px solid #f7d7e7;border-radius:22px;padding:18px;box-shadow:var(--shadow);min-width:0}.card h2{font-size:1.08rem;margin:0 0 14px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-size:.82rem;font-weight:750}
+input,select,textarea{font:inherit;color:var(--ink);background:#fffafd;border:1px solid var(--line);border-radius:12px;padding:12px;width:100%;min-width:0;outline-color:var(--pink)}button{font:inherit;border:0;border-radius:13px;padding:12px 15px;cursor:pointer;font-weight:800;transition:transform .15s}button:active{transform:scale(.98)}.primary{background:var(--pink);color:#fff}.secondary{background:var(--pale);color:#b82e79;border:1px solid var(--line)}.green{background:#e8fff4;color:#187a54;border:1px solid #bcebd5}.danger{background:#fff0f0;color:#b93252}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.note{font-size:.8rem;color:var(--muted);line-height:1.5;margin:12px 0 0}
+.notice{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:17px;padding:14px;margin:10px 0;background:#fffafd}.noticeButton{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:17px;padding:14px;color:var(--ink)}.noticeButton:focus{outline:3px solid #ffc2df}.noticeButton .nhead{display:flex;gap:12px;align-items:center}.nicon{width:46px;height:46px;display:grid;place-items:center;background:var(--pale);border-radius:14px;font-size:1.5rem;flex-shrink:0}.ntext{flex:1;min-width:0}.ntext strong{display:block;font-size:1rem}.ntext small{color:var(--muted)}.nmessage{margin-top:10px;line-height:1.5}.reminder{border:1px solid var(--line);border-radius:16px;padding:13px;margin:10px 0}.rtitle{font-weight:850;overflow-wrap:anywhere}.rmeta{font-size:.8rem;color:var(--muted);margin-top:4px;line-height:1.5}.rbuttons{display:flex;gap:6px;margin-top:9px;flex-wrap:wrap}.rbuttons button{font-size:.78rem;padding:8px 10px}.empty{text-align:center;padding:28px 8px;color:var(--muted)}.empty span{font-size:2.2rem;display:block;margin-bottom:7px}.foot{text-align:center;color:var(--muted);font-size:.78rem;padding:0 12px 28px}.pill{font-size:.72rem;background:#ffe2f0;color:#a72b6e;padding:4px 8px;border-radius:99px;display:inline-block;margin-top:6px}.hidden{display:none!important}#toast{margin:0 0 14px;padding:12px;border-radius:12px;background:#fff;color:var(--ink);border:1px solid var(--line);font-size:.88rem;line-height:1.5}.dashboard{margin-bottom:16px}.dashboard .card{background:linear-gradient(140deg,#fff,#fff4fa)}.subhead{font-size:.83rem;color:var(--muted);margin:-5px 0 12px}.count{display:inline-flex;align-items:center;justify-content:center;min-width:27px;height:27px;padding:0 8px;border-radius:99px;background:var(--pink);color:white;margin-left:6px;font-size:.8rem}
+@media(max-width:720px){.grid{grid-template-columns:1fr}.main{padding:14px 11px 30px}.card{padding:15px}.top{align-items:flex-start}.status{max-width:48%;text-align:center}}@media(max-width:390px){.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.brand{font-size:1.15rem}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+ <div class="top"><div class="brand">💗 StudyPink<small>YOUR STUDY COMPANION</small></div><div class="status">🔔 Notifikasi manual</div></div>
+ <div class="hero"><h1>Belajar lebih teratur,<br>raih mimpi satu per satu ✨</h1><p>Buat jadwal belajar, buka kotak notifikasi, dengarkan pesan, atau kirim pengingat lewat WhatsApp.</p></div>
+</div></header>
+<main class="main wrap">
+ <div id="toast" role="status" aria-live="polite" class="hidden"></div>
+ <section class="dashboard card">
+  <h2>📬 Kotak Notifikasi <span class="count" id="noticeCount">0</span></h2>
+  <p class="subhead">Klik kotak notifikasi untuk mendengarkan pesan suara sesuai jadwal yang kamu buat.</p>
+  <div id="noticeList"></div>
+ </section>
+ <div class="grid">
+  <section class="card"><h2>🌷 Buat Jadwal Belajar</h2>
+   <form id="reminderForm"><div class="formgrid">
+    <div class="field full"><label for="title">Nama tugas</label><input id="title" maxlength="100" placeholder="Contoh: Mengerjakan tugas Matematika" required></div>
+    <div class="field"><label for="nickname">Nama panggilan</label><input id="nickname" maxlength="40" placeholder="Nama kamu"></div>
+    <div class="field"><label for="subject">Mata pelajaran</label><select id="subject"><option>Matematika</option><option>Bahasa Indonesia</option><option>Bahasa Inggris</option><option>IPA</option><option>IPS</option><option>Komputer</option><option>Membaca</option><option>Lainnya</option></select></div>
+    <div class="field"><label for="date">Tanggal</label><input type="date" id="date" required></div>
+    <div class="field"><label for="time">Jam</label><select id="time" required></select></div>
+    <div class="field full"><label for="message">Pilih pesan suara</label><select id="message">
+      <option value="">Yuk, semangat belajar!</option>
+      <option value="Jangan lupa kerjakan tugasnya, ya!">Jangan lupa kerjakan tugasnya, ya!</option>
+      <option value="Ayo belajar dengan semangat! Kamu pasti bisa!">Ayo belajar dengan semangat! Kamu pasti bisa!</option>
+      <option value="Jangan lupa kumpulkan tugas tepat waktu, ya!">Jangan lupa kumpulkan tugas tepat waktu, ya!</option>
+      <option value="Saatnya istirahat sebentar, lalu lanjut belajar.">Saatnya istirahat sebentar, lalu lanjut belajar.</option>
+      <option value="Siapkan buku dan alat tulismu, ya!">Siapkan buku dan alat tulismu, ya!</option>
+      <option value="Waktunya mengulang pelajaran hari ini!">Waktunya mengulang pelajaran hari ini!</option>
+    </select></div>
+   </div><div class="actions"><button class="primary" type="submit">Simpan Jadwal</button><button class="secondary" type="reset">Kosongkan</button></div>
+   <p class="note">Jadwal disimpan di browser/perangkat ini. Notifikasi tampil saat website dibuka. Klik kotaknya untuk memutar suara, atau pilih kirim manual lewat WhatsApp.</p></form>
+  </section>
+  <section class="card"><h2>🗓️ Jadwal Saya</h2><div class="actions" style="margin-top:0;margin-bottom:10px"><button class="secondary" id="refresh">Muat ulang</button></div><div id="reminderList"></div></section>
+ </div>
+</main>
+<div class="foot">Made with 💗 for your learning journey · StudyPink</div>
+<script>
+const KEY="studypink_manual_reminders_v1";
+const $=id=>document.getElementById(id);
+function localDate(d=new Date()){return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
+$("date").min=localDate();$("date").value=localDate();
+for(let h=0;h<24;h++)for(const m of [0,15,30,45]){const v=String(h).padStart(2,"0")+":"+String(m).padStart(2,"0");const o=document.createElement("option");o.value=v;o.textContent=v;$("time").appendChild(o)}
+$("time").value="19:00";
+function getItems(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return []}}
+function saveItems(items){localStorage.setItem(KEY,JSON.stringify(items))}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function msgFor(r){const name=(r.nickname||"");const greeting=name?`Halo ${name},`:"Halo!";return `${greeting} saatnya kamu mengerjakan tugas ${r.subject||"belajar"}. ${r.message||"Yuk, semangat belajar!"}`}
+function speakReminder(r){const text=msgFor(r);if(!("speechSynthesis" in window)){alert("Browser ini belum mendukung suara otomatis. Kamu tetap bisa membaca pesan di kotak notifikasi.");return}window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="id-ID";u.rate=.9;u.pitch=1.12;window.speechSynthesis.speak(u);show("🔊 Memutar suara: "+text)}
+function show(text,error=false){const t=$("toast");t.textContent=text;t.classList.remove("hidden");t.style.background=error?"#fff0f0":"#fff";t.style.borderColor=error?"#e99aaa":"#f5d5e6"}
+function hide(){ $("toast").classList.add("hidden") }
+function shareWA(r){const text=`💗 Pengingat StudyPink\n${msgFor(r)}\n📚 Tugas: ${r.title}\n📘 Pelajaran: ${r.subject}\n📅 Tanggal: ${r.date}\n⏰ Jam: ${r.time}\n\nSemangat belajar! 🌸`;window.open("https://wa.me/?text="+encodeURIComponent(text),"_blank","noopener");}
+function openNotice(r){speakReminder(r)}
+function render(){
+ const items=getItems().sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
+ $("noticeCount").textContent=items.length;
+ const nl=$("noticeList");
+ if(!items.length){nl.innerHTML='<div class="empty"><span>🌸</span>Belum ada notifikasi.<br>Buat jadwal belajar di bawah, ya!</div>'}
+ else {nl.innerHTML=items.map(r=>`<button class="noticeButton" type="button" data-notice="${esc(r.id)}"><div class="nhead"><div class="nicon">🔔</div><div class="ntext"><strong>${esc(r.title)}</strong><small>📅 ${esc(r.date)} · ⏰ ${esc(r.time)} · ${esc(r.subject)}</small></div><span>▶️</span></div><div class="nmessage">${esc(msgFor(r))}</div><small>Ketuk untuk mendengarkan pesan suara</small></button>`).join("")}
+ nl.querySelectorAll("[data-notice]").forEach(b=>b.onclick=()=>{const r=getItems().find(x=>x.id===b.dataset.notice);if(r)openNotice(r)});
+ const box=$("reminderList");
+ if(!items.length){box.innerHTML='<div class="empty"><span>📚</span>Belum ada jadwal.</div>';return}
+ box.innerHTML=items.map(r=>`<div class="reminder"><div class="rtitle">${esc(r.title)}</div><div class="rmeta">📅 ${esc(r.date)} · ⏰ ${esc(r.time)}<br>📘 ${esc(r.subject)}${r.nickname?' · '+esc(r.nickname):''}</div><span class="pill">${new Date(r.date+"T"+r.time+":00")<new Date()?'Waktu lewat':'Jadwal tersimpan di perangkat ini'}</span><div class="rbuttons"><button class="secondary" data-edit="${esc(r.id)}">Edit</button><button class="green" data-wa="${esc(r.id)}">Kirim ke WhatsApp</button><button class="danger" data-del="${esc(r.id)}">Hapus</button></div></div>`).join("");
+ box.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>{const r=getItems().find(x=>x.id===b.dataset.edit);if(!r)return;$("title").value=r.title;$("nickname").value=r.nickname||"";$("subject").value=r.subject;$("date").value=r.date;$("time").value=r.time;$("message").value=r.message||"";saveItems(getItems().filter(x=>x.id!==r.id));render();window.scrollTo({top:0,behavior:"smooth"})});
+ box.querySelectorAll("[data-wa]").forEach(b=>b.onclick=()=>{const r=getItems().find(x=>x.id===b.dataset.wa);if(r)shareWA(r)});
+ box.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{if(confirm("Hapus jadwal ini?")){saveItems(getItems().filter(x=>x.id!==b.dataset.del));render();show("Jadwal dihapus.")}});
+}
+$("reminderForm").addEventListener("submit",e=>{e.preventDefault();hide();const r={id:Date.now().toString(36)+Math.random().toString(36).slice(2,7),title:$("title").value.trim(),nickname:$("nickname").value.trim(),subject:$("subject").value,date:$("date").value,time:$("time").value,message:$("message").value.trim()};if(!r.title){show("Nama tugas harus diisi.",true);return}if(new Date(r.date+"T"+r.time+":00")<new Date()){show("Pilih tanggal dan jam yang belum lewat, ya.",true);return}const items=getItems();items.push(r);saveItems(items);render();show("Jadwal berhasil disimpan! Kotak notifikasi sudah diperbarui.");e.target.reset();$("date").min=localDate();$("date").value=localDate();$("time").value="19:00"});
+$("refresh").onclick=()=>{render();show("Kotak notifikasi dan jadwal diperbarui.")};
+render();
+</script>
+</body>
+</html>
